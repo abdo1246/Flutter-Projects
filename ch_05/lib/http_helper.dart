@@ -10,9 +10,9 @@ class HttpHelper {
   final String urlLanguage = '&language=en-US';
   final String urlSearchBase = 'https://api.themoviedb.org/3/search/movie?api_key=e3fd37e8dd3eca6eecb8808906be73bc&query=';
 
-  Future<List> getUpcoming() async {
+  Future<List?> getUpcoming() async {
     final String upcoming = urlBase + urlUpcoming + urlKey + urlLanguage;
-    http.Response result = await http.get(upcoming);
+    http.Response result = await http.get(Uri.parse(upcoming));
     var myResult = await http.get(upcoming);
 
     if (result.statusCode == HttpStatus.ok) {
@@ -25,7 +25,7 @@ class HttpHelper {
     }
   }
 
-  Future<List> findMovies(String title) async {
+  Future<List?> findMovies(String title) async {
     final String query = urlSearchBase + title ;
     http.Response result = await http.get(query);
     if (result.statusCode == HttpStatus.ok) {
